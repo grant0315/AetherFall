@@ -11,6 +11,9 @@ pygame.init()
 screen = pygame.display.set_mode((c.INITIAL_WINDOW_WIDTH, c.INITIAL_WINDOW_HEIGHT), pygame.RESIZABLE)
 pygame.display.set_caption(c.WINDOW_TITLE)
 
+# Initilze Clock
+clock = pygame.time.Clock()
+
 # Initlize new sizes to avoid UnboundLocalError
 new_width, new_height = c.INITIAL_WINDOW_WIDTH, c.INITIAL_WINDOW_HEIGHT
 
@@ -30,9 +33,7 @@ class Game:
         self.create_entities()
 
     def create_entities(self):
-        grid = lib.GridEntity(5, 5, c.GRID_COLOR)
-        self.all_sprites.add(grid)
-        self.grid = grid  # Save reference to player for input handling
+        pass
 
     def handle_events(self):
         for event in pygame.event.get():
@@ -93,12 +94,14 @@ class Game:
 
     def draw(self):
         self.screen.fill(c.WHITE)
-        lib.GridEntity.draw_grid(self.screen, c.GRID_SIZE, c.GRID_COLOR, self.zoom, self.offset_x, self.offset_y)
         pygame.display.flip()
 
     def run(self):
         running = True
         while running:
+            # Limit frame rate
+            clock.tick()
+            
             running = self.handle_events()
             self.update()
             self.draw()

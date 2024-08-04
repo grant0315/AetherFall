@@ -32,6 +32,7 @@ class GridEntity(pygame.sprite.Sprite):
         end_y = c.GRID_HEIGHT * grid_size * zoom + offset_y
         
         for x in range(start_x, width, int(grid_size * zoom)):
+                print(f"xline positions: ({x + offset_x}, {0}), ({x + offset_x}, {end_y})")
                 pygame.draw.line(surface, color, (x + offset_x, 0), (x + offset_x, end_y))
         for y in range(start_y, height, int(grid_size * zoom)):
                 pygame.draw.line(surface, color, (0, y + offset_y), (end_x, y + offset_y))
